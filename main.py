@@ -1,4 +1,5 @@
 import pygame
+import cfg
 from Area import Area
 from Player import Player
 
@@ -9,22 +10,10 @@ pygame.display.set_caption("Snake")
 pygame.display.set_icon(pygame.image.load("images/snake.png"))
 clock = pygame.time.Clock()
 bg = pygame.image.load('images/wallpaper_snake.png')
-FPS = 60
-icons = [
-    'images/frankenstein.png',
-    'images/pumpkin.png',
-    'images/witch.png',
-    'images/candy-bag.png']
-colors = [
-    [255, 0, 0],
-    [0, 255, 0],
-    [0, 0, 255],
-    [255, 255, 0]]
-numbers = list(range(1, 5))
 
-# Цвета
-cream = (253, 244, 227)
-black = (0, 0, 0)
+list_players = []
+list_areas = []
+selected_players = 0
 
 # Шрифт для текста
 font = pygame.font.Font(None, 36)
@@ -33,9 +22,9 @@ font = pygame.font.Font(None, 36)
 # Функция для создания кнопок
 def create_button(text, x, y, width, height):
     button_rect = pygame.Rect(x, y, width, height)
-    pygame.draw.rect(screen, cream, button_rect)
-    pygame.draw.rect(screen, black, button_rect, 2)
-    text_surface = font.render(text, True, black)
+    pygame.draw.rect(screen, cfg.cream, button_rect)
+    pygame.draw.rect(screen, cfg.black, button_rect, 2)
+    text_surface = font.render(text, True, cfg.black)
     text_rect = text_surface.get_rect(center=button_rect.center)
     screen.blit(text_surface, text_rect)
     return button_rect
@@ -43,19 +32,17 @@ def create_button(text, x, y, width, height):
 
 # Функция для отображения меню
 def display_menu():
-    screen.fill(black)
-    button1 = create_button("2 игрока", 500, 400, 200, 100)
-    button2 = create_button("3 игрока", 800, 400, 200, 100)
-    button3 = create_button("4 игрока", 1100, 400, 200, 100)
-    play_button = create_button("Играть", 800, 600, 200, 100)
+    screen.fill(cfg.black)
+    b1 = create_button("2 игрока", 500, 400, 200, 100)
+    b2 = create_button("3 игрока", 800, 400, 200, 100)
+    b3 = create_button("4 игрока", 1100, 400, 200, 100)
+    b4 = create_button("Играть", 800, 600, 200, 100)
     pygame.display.flip()
 
-    return button1, button2, button3, play_button
+    return b1, b2, b3, b4
 
 
 # list_players = [Player(png, col, num) for png, col, num in zip(icons, colors, numbers)]
-list_players = []
-selected_players = 0
 button1, button2, button3, play_button = display_menu()
 running = True
 while running:
@@ -76,12 +63,19 @@ while running:
     pygame.display.flip()
     # screen.blit(list_players[0].image, list_players[0].rect)
 del button1, button2, button3, play_button
-for i in range(selected_players):
-    list_players.append(Player(icons[i], colors[i], numbers[i]))
+[list_players.append(
+    Player(cfg.icons[i], cfg.colors[i], cfg.numbers[i])
+) for i in range(selected_players)]
 
+[list_areas.append(
+    Area(png=f'images/area/{i}r.png', number=i, tuple_=cfg.list_tuples[i - 1], question=cfg.bool_question(i))
+) for i in range(1, cfg.COUNT_AREA + 1)]
+
+screen.blit(bg, (0, 0))
+for i in range(cfg.COUNT_AREA):
+    screen.blit(list_areas[i].image, (list_areas[i].x, list_areas[i].y))
 
 while True:
-    screen.blit(bg, (0, 0))
     screen.blit(list_players[0].image, list_players[0].rect)
     pygame.display.update()
 
@@ -89,6 +83,6 @@ while True:
         if event.type == pygame.QUIT:
             exit()
 
-    clock.tick(FPS)
+    clock.tick(cfg.FPS)
 
     # list_players[0].update(1)
