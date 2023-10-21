@@ -12,7 +12,7 @@ class Area(pygame.surface.Surface):
         self.question = question
         self.__people = []
 
-    def add_player(self, player: Player):
+    def add_player(self, player: Player):   # sort in area
         sort_plat_xy = [(self.x + 70, self.y + 30),
                         (self.x + 160, self.y + 30),
                         (self.x + 70, self.y + 100),

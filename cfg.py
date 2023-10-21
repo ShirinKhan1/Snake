@@ -1,28 +1,28 @@
 FPS = 10
-TUPLE_AREA = (2, 5)
-COUNT_AREA = TUPLE_AREA[0] * TUPLE_AREA[1]
+TUPLE_AREA = (2, 5)  # матрица полей
+COUNT_AREA = TUPLE_AREA[0] * TUPLE_AREA[1]  # count of area
 icons = [
     'images/frankenstein.png',
     'images/pumpkin.png',
     'images/witch.png',
     'images/candy-bag.png']
-colors = [
-    [255, 0, 0],
-    [0, 255, 0],
-    [0, 0, 255],
-    [255, 255, 0]]
-numbers = list(range(1, 5))
+
+# colors = [
+#     [255, 0, 0],
+#     [0, 255, 0],
+#     [0, 0, 255],
+#     [255, 255, 0]]
+
+numbers = list(range(1, 5))  # count of players
 
 # Цвета
 cream = (253, 244, 227)
 black = (0, 0, 0)
 
-# для сортировки на поле
+area_len_px, area_height_px = 271, 174  # len, height area
 
-area_len_px, area_height_px = 271, 174
-
-question = [1, 5, 10]
-bool_question = lambda x: x in question
+question = [1, 5, 10]  # list of area, which has question
+bool_question = lambda x: x in question # for Area (check main.py 72 row)
 
 
 def tuples(count_area: tuple):  # write(y,x) не пытайся понять логику ;D
@@ -36,7 +36,7 @@ def tuples(count_area: tuple):  # write(y,x) не пытайся понять л
         start_y -= area_height_px + 20
     return list_areas
 
-
+######################################################################################################################
 list_tuples = tuples(TUPLE_AREA)
 
 if __name__ == '__main__':
