@@ -1,4 +1,4 @@
-FPS = 60
+FPS = 10
 TUPLE_AREA = (2, 5)
 COUNT_AREA = TUPLE_AREA[0] * TUPLE_AREA[1]
 icons = [
@@ -16,6 +16,8 @@ numbers = list(range(1, 5))
 # Цвета
 cream = (253, 244, 227)
 black = (0, 0, 0)
+
+# для сортировки на поле
 
 area_len_px, area_height_px = 271, 174
 

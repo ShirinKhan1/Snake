@@ -63,6 +63,7 @@ while running:
     pygame.display.flip()
     # screen.blit(list_players[0].image, list_players[0].rect)
 del button1, button2, button3, play_button
+
 [list_players.append(
     Player(cfg.icons[i], cfg.colors[i], cfg.numbers[i])
 ) for i in range(selected_players)]
@@ -72,17 +73,28 @@ del button1, button2, button3, play_button
 ) for i in range(1, cfg.COUNT_AREA + 1)]
 
 screen.blit(bg, (0, 0))
-for i in range(cfg.COUNT_AREA):
-    screen.blit(list_areas[i].image, (list_areas[i].x, list_areas[i].y))
 
+k = 1
 while True:
-    screen.blit(list_players[0].image, list_players[0].rect)
+    screen.blit(bg, (0, 0))
+    for i in range(cfg.COUNT_AREA):
+        screen.blit(list_areas[i].image, (list_areas[i].x, list_areas[i].y))
+    for i in range(selected_players):
+        screen.blit(list_players[i].image, list_players[i].rect)
     pygame.display.update()
-
+    # print(list_players[0].rect)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             exit()
+    if k == 1:
+        list_areas[0].add_player(list_players[0])
+        list_areas[0].add_player(list_players[1])
+        list_areas[0].add_player(list_players[2])
+        list_areas[0].add_player(list_players[3])
 
+        k += 1
+    if k == 2:
+        list_areas[0].del_player(list_players[0])
+        k += 1
+    list_players[0].update(1)
     clock.tick(cfg.FPS)
-
-    # list_players[0].update(1)

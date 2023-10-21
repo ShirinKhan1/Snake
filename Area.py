@@ -13,7 +13,20 @@ class Area(pygame.surface.Surface):
         self.__people = []
 
     def add_player(self, player: Player):
+        sort_plat_xy = [(self.x + 70, self.y + 30),
+                        (self.x + 160, self.y + 30),
+                        (self.x + 70, self.y + 100),
+                        (self.x + 160, self.y + 100)]
+
         self.__people.append(player)
+        for i in range(len(self.__people)):
+            self.__people[i].rect.x, self.__people[i].rect.y = sort_plat_xy[i][0],sort_plat_xy[i][1]
 
     def del_player(self, player: Player):
-        return self.__people.remove(player)
+        for i in range(len(self.__people)):
+            if self.__people[i].number == player.number:
+                self.__people.pop(i)
+                break
+        player.rect.x = 60
+        player.rect.y = self.y + 50
+

@@ -1,4 +1,5 @@
 import pygame
+import cfg
 
 
 class Player(pygame.sprite.Sprite):
@@ -11,6 +12,10 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(center=(100, 800))
 
     def update(self, step):
-        for _ in range(step):
-            self.rect.x += 3
 
+        for _ in range(step):
+            if self.rect.x < (cfg.area_len_px - 50) * 5:
+                self.rect.x += cfg.area_len_px + 50
+            else:
+                self.rect.x = 60
+                self.rect.y -= cfg.area_height_px
