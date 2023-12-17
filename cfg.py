@@ -1,12 +1,21 @@
-FPS = 10
-TUPLE_AREA = (2, 5)  # матрица полей
+import pygame
+
+FPS = 2
+TUPLE_AREA = (4, 4)  # матрица полей
 COUNT_AREA = TUPLE_AREA[0] * TUPLE_AREA[1]  # count of area
-icons = [
+icons_halloween = [
     'images/frankenstein.png',
     'images/pumpkin.png',
     'images/witch.png',
     'images/candy-bag.png']
 
+icons_christmas = [
+    'images/cane.png',
+    'images/christmas_tree.png',
+    'images/gingerbread.png',
+    'images/cookie.png'
+]
+icons = []
 # colors = [
 #     [255, 0, 0],
 #     [0, 255, 0],
@@ -22,7 +31,7 @@ black = (0, 0, 0)
 area_len_px, area_height_px = 271, 174  # len, height area
 
 question = [1, 5, 10]  # list of area, which has question
-bool_question = lambda x: x in question # for Area (check main.py 72 row)
+bool_question = lambda x: x in question  # for Area (check main.py 72 row)
 
 
 def tuples(count_area: tuple):  # write(y,x) не пытайся понять логику ;D
@@ -35,6 +44,9 @@ def tuples(count_area: tuple):  # write(y,x) не пытайся понять л
             start_x += area_len_px + 30
         start_y -= area_height_px + 20
     return list_areas
+
+
+clock = pygame.time.Clock()
 
 ######################################################################################################################
 list_tuples = tuples(TUPLE_AREA)

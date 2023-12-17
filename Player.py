@@ -7,10 +7,11 @@ class Player(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load(png).convert_alpha()
         self.number = number
-        self.locate = 1
+        self.locate = 0
         self.rect = self.image.get_rect(center=(100, 800))
 
     def update(self, step):  # move player
+        self.locate += step
         for _ in range(step):
             if self.rect.x < (cfg.area_len_px - 50) * 5:
                 self.rect.x += cfg.area_len_px + 50
